@@ -27,10 +27,23 @@ public class CustomerRequestTests {
         customer.setEmail(faker.internet().emailAddress());
         customer.setPassword(faker.internet().password());
 
-        CustomerRequest request = modelMapper.map(customer, CustomerRequest.class);
-        Assert.assertEquals(customer.getName(), request.getName());
-        Assert.assertEquals(customer.getEmail(), request.getEmail());
-        Assert.assertEquals(customer.getPassword(), request.getPassword());
+        CustomerRequest customerRequest = modelMapper.map(customer, CustomerRequest.class);
+        Assert.assertEquals(customer.getName(), customerRequest.getName());
+        Assert.assertEquals(customer.getEmail(), customerRequest.getEmail());
+        Assert.assertEquals(customer.getPassword(), customerRequest.getPassword());
+    }
+
+    @Test
+    public void shouldConvertCustomerRequestToCustomerModel() {
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setName(faker.name().name());
+        customerRequest.setEmail(faker.internet().emailAddress());
+        customerRequest.setPassword(faker.internet().password());
+
+        Customer customer = modelMapper.map(customerRequest, Customer.class);
+        Assert.assertEquals(customer.getName(), customerRequest.getName());
+        Assert.assertEquals(customer.getEmail(), customerRequest.getEmail());
+        Assert.assertEquals(customer.getPassword(), customerRequest.getPassword());
     }
 
 
