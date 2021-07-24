@@ -18,12 +18,17 @@ import javax.validation.ValidationException;
 @Service
 public class AddCustomerService extends FactoryManager implements AddCustomer {
 
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    private CustomerRepository customerRepository;
+    public AddCustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public CustomerResponse add(CustomerRequest customerRequest) throws InvalidPasswordConfirmationException {
         Customer customer = getObjectFromRequest(customerRequest, Customer.class);
+
         if (!customer.getPassword().equals(customerRequest.getPasswordConfirmation()))
             throw new InvalidPasswordConfirmationException();
         customerRepository.save(customer);

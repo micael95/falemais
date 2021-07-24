@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
-public class CustomerResponseTest {
+public class CustomerResponseTests {
 
     private Faker faker = new Faker();
     private ModelMapper modelMapper = new ModelMapper();

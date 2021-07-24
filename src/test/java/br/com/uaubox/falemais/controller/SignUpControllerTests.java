@@ -26,11 +26,12 @@ import java.net.URI;
 public class SignUpControllerTests {
 
     private static final String SIGNUP_URI = "/api/v1/signup";
+    private final Faker faker = new Faker();
+
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    ObjectMapper objectMapper;
-    private Faker faker = new Faker();
+    private ObjectMapper objectMapper;
 
     @Test
     public void shouldReturn400IfValidationReturnsAnError() throws Exception {
@@ -44,6 +45,21 @@ public class SignUpControllerTests {
 
     @Test
     public void shouldReturn422IfPasswordConfirmationIsInvalid() throws Exception {
+        URI uri = new URI(SIGNUP_URI);
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setName(faker.name().name());
+        customerRequest.setEmail(faker.internet().emailAddress());
+        customerRequest.setPassword(faker.internet().password());
+        customerRequest.setPasswordConfirmation("invalid_password");
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .content(objectMapper.writeValueAsString(customerRequest))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void shouldReturn409IfEmailAlreadyRegistered() throws Exception {
         URI uri = new URI(SIGNUP_URI);
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setName(faker.name().name());
