@@ -1,30 +1,14 @@
-package br.com.uaubox.falemais.domain.model;
+package br.com.uaubox.falemais.domain.dto.response;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity
-public class Customer {
-    @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid4")
+public class CustomerResponse {
     private String customerId;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
     private boolean active;
-    @CreationTimestamp
     private LocalDateTime createdAt;
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public String getCustomerId() {

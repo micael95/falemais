@@ -21,19 +21,6 @@ public class CustomerRequestTests {
     }
 
     @Test
-    public void shouldConvertCustomerModelToCustomerRequest() {
-        Customer customer = new Customer();
-        customer.setName(faker.name().name());
-        customer.setEmail(faker.internet().emailAddress());
-        customer.setPassword(faker.internet().password());
-
-        CustomerRequest customerRequest = modelMapper.map(customer, CustomerRequest.class);
-        Assert.assertEquals(customer.getName(), customerRequest.getName());
-        Assert.assertEquals(customer.getEmail(), customerRequest.getEmail());
-        Assert.assertEquals(customer.getPassword(), customerRequest.getPassword());
-    }
-
-    @Test
     public void shouldConvertCustomerRequestToCustomerModel() {
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setName(faker.name().name());
