@@ -1,4 +1,4 @@
-package br.com.uaubox.falemais.domain.dto.response;
+package br.com.uaubox.falemais.dto.response;
 
 import java.time.LocalDateTime;
 

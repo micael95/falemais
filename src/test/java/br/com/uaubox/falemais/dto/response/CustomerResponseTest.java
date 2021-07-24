@@ -1,6 +1,5 @@
-package br.com.uaubox.falemais.domain.dto.response;
+package br.com.uaubox.falemais.dto.response;
 
-import br.com.uaubox.falemais.domain.dto.request.CustomerRequest;
 import br.com.uaubox.falemais.domain.model.Customer;
 import com.github.javafaker.Faker;
 import org.junit.Assert;

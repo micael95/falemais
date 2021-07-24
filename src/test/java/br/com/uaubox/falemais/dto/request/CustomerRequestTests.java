@@ -1,12 +1,10 @@
-package br.com.uaubox.falemais.domain.dto.request;
+package br.com.uaubox.falemais.dto.request;
 
 import br.com.uaubox.falemais.domain.model.Customer;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 

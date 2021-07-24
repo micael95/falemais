@@ -1,4 +1,4 @@
-package br.com.uaubox.falemais.controllers;
+package br.com.uaubox.falemais.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
