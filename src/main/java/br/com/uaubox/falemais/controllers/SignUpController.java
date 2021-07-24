@@ -14,7 +14,7 @@ public class SignUpController {
 
     @PostMapping()
     public ResponseEntity<Object> handle(@RequestBody @Valid Object form) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 
 }

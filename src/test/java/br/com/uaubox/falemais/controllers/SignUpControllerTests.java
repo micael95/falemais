@@ -30,6 +30,7 @@ public class SignUpControllerTests {
         URI uri = new URI("/api/v1/signup");
         mockMvc.perform(MockMvcRequestBuilders
                 .post(uri)
+                .content("{}")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
