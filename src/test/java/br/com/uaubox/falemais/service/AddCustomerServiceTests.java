@@ -1,8 +1,11 @@
 package br.com.uaubox.falemais.service;
 
+import br.com.uaubox.falemais.domain.model.Customer;
 import br.com.uaubox.falemais.domain.repository.CustomerRepository;
 import br.com.uaubox.falemais.dto.request.CustomerRequest;
+import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
 import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
+import br.com.uaubox.falemais.factory.FactoryManager;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -12,6 +15,7 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,9 +34,8 @@ import java.net.URI;
 public class AddCustomerServiceTests {
 
     private final Faker faker = new Faker();
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-    @Mock
+    private final ModelMapper modelMapper = new ModelMapper();
+    @Autowired
     private CustomerRepository customerRepository;
 
     private AddCustomerService addCustomerService;
@@ -55,7 +58,24 @@ public class AddCustomerServiceTests {
         try {
             addCustomerService.add(customerRequest);
             Assert.fail("exception not throed");
-        } catch (InvalidPasswordConfirmationException e) {}
+        } catch (Exception e) {}
+
+    }
+
+    @Test()
+    public void shouldThrowExceptionIfEmailAlreadyExists() {
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setName(faker.name().name());
+        customerRequest.setEmail(faker.internet().emailAddress());
+        customerRequest.setPassword(faker.internet().password());
+        customerRequest.setPasswordConfirmation(customerRequest.getPassword());
+        Customer customer = modelMapper.map(customerRequest, Customer.class);
+        this.customerRepository.save(customer);
+
+        try {
+            addCustomerService.add(customerRequest);
+            Assert.fail("exception not throed");
+        } catch (Exception e) {}
 
     }
 
