@@ -18,5 +18,5 @@
 1.  Retorna erro **400** se name, email, password ou passwordConfirmation não forem fornecidos pelo client
 2.  Retorna erro **422** se password e passwordConfirmation não forem iguais
 3.  Retorna erro **422** se o campo email for um e-mail inválido
-4.  Retorna erro **403** se o email fornecido já estiver em uso
+4.  Retorna erro **409** se o email fornecido já estiver em uso
 5.  Retorna erro **500** se der erro interno no servidor

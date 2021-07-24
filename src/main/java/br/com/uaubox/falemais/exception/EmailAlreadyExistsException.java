@@ -1,21 +1,17 @@
 package br.com.uaubox.falemais.exception;
 
-public class InvalidPasswordConfirmationException extends Exception {
+public class EmailAlreadyExistsException extends Exception{
     private String message;
     private String code;
 
-    public InvalidPasswordConfirmationException(String message) {
-        super(message);
-    }
+    public EmailAlreadyExistsException(String message) { super(message); }
 
-    public InvalidPasswordConfirmationException(String code, String message) {
+    public EmailAlreadyExistsException(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public InvalidPasswordConfirmationException() {
-    }
-
+    public EmailAlreadyExistsException() {}
 
     @Override
     public String getMessage() {
@@ -33,5 +29,4 @@ public class InvalidPasswordConfirmationException extends Exception {
     public void setCode(String code) {
         this.code = code;
     }
-
 }

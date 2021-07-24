@@ -6,6 +6,7 @@ import br.com.uaubox.falemais.domain.usecases.AddCustomer;
 import br.com.uaubox.falemais.dto.request.CustomerRequest;
 import br.com.uaubox.falemais.dto.response.CustomerResponse;
 import br.com.uaubox.falemais.dto.response.ErrorResponse;
+import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
 import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
 import br.com.uaubox.falemais.factory.FactoryManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,17 @@ public class AddCustomerService extends FactoryManager implements AddCustomer {
     }
 
     @Override
-    public CustomerResponse add(CustomerRequest customerRequest) throws InvalidPasswordConfirmationException {
+    public CustomerResponse add(CustomerRequest customerRequest) throws InvalidPasswordConfirmationException, EmailAlreadyExistsException {
         Customer customer = getObjectFromRequest(customerRequest, Customer.class);
 
         if (!customer.getPassword().equals(customerRequest.getPasswordConfirmation()))
-            throw new InvalidPasswordConfirmationException();
+            throw new InvalidPasswordConfirmationException("invalid-password-confirmation", "Invalid password confirmation");
+
+        Customer hasCustomerInDb = customerRepository.findByEmail(customerRequest.getEmail());
+        if (hasCustomerInDb != null) {
+            throw new EmailAlreadyExistsException("email-already-registered", "Email already registered");
+        }
+
         customerRepository.save(customer);
         return getResponseFromObject(customer, CustomerResponse.class);
     }
