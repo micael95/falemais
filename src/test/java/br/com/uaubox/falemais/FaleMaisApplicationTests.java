@@ -1,10 +1,10 @@
-package br.com.uaubox.falemais.main;
+package br.com.uaubox.falemais;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class FaleMaisApplicationTests {
 
 	@Test
 	void contextLoads() {
