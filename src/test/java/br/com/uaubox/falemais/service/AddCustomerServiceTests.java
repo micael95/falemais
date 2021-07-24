@@ -9,6 +9,7 @@ import br.com.uaubox.falemais.factory.FactoryManager;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.junit.Rule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
@@ -57,8 +58,8 @@ public class AddCustomerServiceTests {
 
         try {
             addCustomerService.add(customerRequest);
-            Assert.fail("exception not throed");
-        } catch (Exception e) {}
+            Assertions.fail("exception not thrown");
+        } catch (Exception ignored) {}
 
     }
 
@@ -74,8 +75,8 @@ public class AddCustomerServiceTests {
 
         try {
             addCustomerService.add(customerRequest);
-            Assert.fail("exception not throed");
-        } catch (Exception e) {}
+            Assertions.fail("exception not thrown");
+        } catch (Exception ignored) {}
 
     }
 
