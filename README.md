@@ -13,6 +13,9 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 * Utilização de testes unitários
 * Uso avançado da linguagem e/ou framework.
 
+## DER
+
+![alt text](./requirements/assets/der.png)
 
 ## Casos de Uso
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
