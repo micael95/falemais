@@ -6,13 +6,17 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
 public class Customer {
+
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "customer_id", unique = true)
     @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid4")
     private String customerId;
     @Column(nullable = false)
     private String name;
@@ -20,8 +24,8 @@ public class Customer {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
-    private boolean active;
+    @Column(nullable = false)
+    private boolean active = true;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

@@ -10,17 +10,19 @@ public class CustomerRequest {
 
     @NotNull
     @NotEmpty
-    @Length(min = 255)
+    @Length(min = 5)
     private String name;
     @NotNull
     @Email
-    @Length(min = 255)
+    @Length(min = 10)
     private String email;
     @NotNull
     @NotEmpty
+    @Length(min = 6)
     private String password;
     @NotNull
     @NotEmpty
+    @Length(min = 6)
     private String passwordConfirmation;
 
     public String getName() {
