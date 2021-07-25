@@ -13,9 +13,37 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 * Utilização de testes unitários
 * Uso avançado da linguagem e/ou framework.
 
+## Demo
+* [Aplicação demo disponibilizada no heroku](https://falemais-uaubox.herokuapp.com/swagger-ui.html)
+
+## Conceitos utilizados
+
+* CleanCode
+* CleanArchitecture
+* Alguns principios de SOLID
+* TDD
+* GitFlow
+* POO Avançado
+
+## Ferramentas utilizadas
+
+* Heroku
+* Docker  
+* Sprint Starter Web  
+* Spring Security
+* JsonWebToken
+* Swagger
+* ModelMapper
+* Junit
+* Faker
+* Mockito
+
 ## DER
 
 ![alt text](./requirements/assets/der.png)
+
+
+
 
 ## Casos de Uso
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
