@@ -1,3 +1,4 @@
+![Bulding](https://github.com/micael95/falemais/actions/workflows/maven.yml/badge.svg)
 # **FaleMais Spring API**
 
 ## Sobre
