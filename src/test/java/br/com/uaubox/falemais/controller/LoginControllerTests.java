@@ -1,5 +1,10 @@
 package br.com.uaubox.falemais.controller;
 
+import br.com.uaubox.falemais.domain.model.Customer;
+import br.com.uaubox.falemais.domain.repository.CustomerRepository;
+import br.com.uaubox.falemais.dto.request.TokenRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +28,13 @@ import java.net.URI;
 public class LoginControllerTests {
 
     private static final String LOGIN_URI = "/oauth/token";
+    private final Faker faker = new Faker();
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Test
     public void shouldReturn400IfValidationReturnsAnError() throws Exception {
@@ -35,5 +45,29 @@ public class LoginControllerTests {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+
+    @Test
+    public void shouldReturn401IfInvalidCredentialsIsProvided() throws Exception {
+        URI uri = new URI(LOGIN_URI);
+
+        Customer customer = new Customer();
+        customer.setName(faker.name().name());
+        customer.setEmail(faker.internet().emailAddress());
+        customer.setPassword(faker.internet().password());
+
+        customerRepository.save(customer);
+
+        TokenRequest tokenRequest = new TokenRequest();
+        tokenRequest.setEmail(customer.getEmail());
+        tokenRequest.setPassword("invalid_password");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .content(objectMapper.writeValueAsString(tokenRequest))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+
 
 }
