@@ -1,4 +1,5 @@
-![Bulding](https://github.com/micael95/falemais/actions/workflows/maven.yml/badge.svg)
+![Bulding](https://github.com/micael95/falemais/actions/workflows/maven.yml/badge.svg) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # **FaleMais Spring API**
 
 ## Sobre
