@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -80,5 +81,21 @@ public class SignUpControllerTests {
                 .content(objectMapper.writeValueAsString(customerRequest))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isConflict());
+    }
+
+    @Test
+    public void shouldReturn201ifCorrectValuesIsProvidedAndCreateACustomerObject() throws Exception {
+        URI uri = new URI(SIGNUP_URI);
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setName(faker.name().name());
+        customerRequest.setEmail(faker.internet().emailAddress());
+        customerRequest.setPassword(faker.internet().password());
+        customerRequest.setPasswordConfirmation(customerRequest.getPassword());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .content(objectMapper.writeValueAsString(customerRequest))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 }
