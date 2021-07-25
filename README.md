@@ -31,6 +31,7 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 ## Ferramentas utilizadas
 
 * Heroku
+* CI/CD com GitHub Actions  
 * Docker  
 * Sprint Starter Web  
 * Spring Security
