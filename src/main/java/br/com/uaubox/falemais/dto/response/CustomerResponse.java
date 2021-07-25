@@ -6,7 +6,6 @@ public class CustomerResponse {
     private String customerId;
     private String name;
     private String email;
-    private String password;
     private boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -33,14 +32,6 @@ public class CustomerResponse {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean isActive() {

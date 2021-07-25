@@ -28,6 +28,5 @@ public class CustomerResponseTests {
         CustomerResponse customerResponse = modelMapper.map(customer, CustomerResponse.class);
         Assert.assertEquals(customer.getName(), customerResponse.getName());
         Assert.assertEquals(customer.getEmail(), customerResponse.getEmail());
-        Assert.assertEquals(customer.getPassword(), customerResponse.getPassword());
     }
 }

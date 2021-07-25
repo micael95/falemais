@@ -5,16 +5,14 @@ import br.com.uaubox.falemais.domain.repository.CustomerRepository;
 import br.com.uaubox.falemais.domain.usecases.AddCustomer;
 import br.com.uaubox.falemais.dto.request.CustomerRequest;
 import br.com.uaubox.falemais.dto.response.CustomerResponse;
-import br.com.uaubox.falemais.dto.response.ErrorResponse;
 import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
 import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
 import br.com.uaubox.falemais.factory.FactoryManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import javax.validation.ValidationException;
+import java.util.Optional;
 
 @Service
 public class AddCustomerService extends FactoryManager implements AddCustomer {
@@ -26,6 +24,7 @@ public class AddCustomerService extends FactoryManager implements AddCustomer {
         this.customerRepository = customerRepository;
     }
 
+
     @Override
     public CustomerResponse add(CustomerRequest customerRequest) throws InvalidPasswordConfirmationException, EmailAlreadyExistsException {
         Customer customer = getObjectFromRequest(customerRequest, Customer.class);
@@ -33,10 +32,12 @@ public class AddCustomerService extends FactoryManager implements AddCustomer {
         if (!customer.getPassword().equals(customerRequest.getPasswordConfirmation()))
             throw new InvalidPasswordConfirmationException("invalid-password-confirmation", "Invalid password confirmation");
 
-        Customer hasCustomerInDb = customerRepository.findByEmail(customerRequest.getEmail());
-        if (hasCustomerInDb != null) {
+        Optional<Customer> hasCustomerInDb = customerRepository.findByEmail(customerRequest.getEmail());
+        if (hasCustomerInDb.isPresent()) {
             throw new EmailAlreadyExistsException("email-already-registered", "Email already registered");
         }
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 
         customerRepository.save(customer);
         return getResponseFromObject(customer, CustomerResponse.class);
