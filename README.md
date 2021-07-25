@@ -20,16 +20,18 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 
 ## Conceitos utilizados
 
-* CleanCode
-* CleanArchitecture
+* Clean Code
+* Clean Architecture
 * Alguns principios de SOLID
+* POO Avançado
 * TDD
 * GitFlow
-* POO Avançado
+* Conventional Commits
 
 ## Ferramentas utilizadas
 
 * Heroku
+* CI/CD com GitHub Actions  
 * Docker  
 * Sprint Starter Web  
 * Spring Security
@@ -44,8 +46,6 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 
 ![alt text](./requirements/assets/der.png)
 
-
-
-
 ## Casos de Uso
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
+* [Login (Login do cliente)](./requirements/auth.md)

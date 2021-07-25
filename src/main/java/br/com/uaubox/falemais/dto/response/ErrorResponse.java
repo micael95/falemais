@@ -6,12 +6,12 @@ import org.springframework.http.ResponseEntity;
 
 public class ErrorResponse {
 
-    public static ResponseEntity<ApiResponse> handle(Exception e, Logger logger) {
+    public static ResponseEntity<ApiResponseMessage> handle(Exception e, Logger logger) {
         logger.error(e.getMessage());
-        return new ResponseEntity<>(new ApiResponse("internal-server-error", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ApiResponseMessage("internal-server-error", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static ResponseEntity<ApiResponse> handle(String code, String message, HttpStatus status) {
-        return new ResponseEntity<>(new ApiResponse(code, message), status);
+    public static ResponseEntity<ApiResponseMessage> handle(String code, String message, HttpStatus status) {
+        return new ResponseEntity<>(new ApiResponseMessage(code, message), status);
     }
 }
