@@ -3,8 +3,8 @@ package br.com.uaubox.falemais.dto.response;
 import br.com.uaubox.falemais.domain.model.Customer;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 

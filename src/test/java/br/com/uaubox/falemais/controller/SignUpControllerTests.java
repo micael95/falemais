@@ -1,10 +1,13 @@
 package br.com.uaubox.falemais.controller;
 
+import br.com.uaubox.falemais.domain.model.Customer;
+import br.com.uaubox.falemais.domain.repository.CustomerRepository;
 import br.com.uaubox.falemais.dto.request.CustomerRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,12 +29,15 @@ import java.net.URI;
 public class SignUpControllerTests {
 
     private static final String SIGNUP_URI = "/api/v1/signup";
+    private final ModelMapper modelMapper = new ModelMapper();
     private final Faker faker = new Faker();
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Test
     public void shouldReturn400IfValidationReturnsAnError() throws Exception {
@@ -65,11 +71,14 @@ public class SignUpControllerTests {
         customerRequest.setName(faker.name().name());
         customerRequest.setEmail(faker.internet().emailAddress());
         customerRequest.setPassword(faker.internet().password());
-        customerRequest.setPasswordConfirmation("invalid_password");
+        customerRequest.setPasswordConfirmation(customerRequest.getPassword());
+        Customer customer = modelMapper.map(customerRequest, Customer.class);
+        this.customerRepository.save(customer);
+
         mockMvc.perform(MockMvcRequestBuilders
                 .post(uri)
                 .content(objectMapper.writeValueAsString(customerRequest))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
+                .andExpect(MockMvcResultMatchers.status().isConflict());
     }
 }

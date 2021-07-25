@@ -3,30 +3,16 @@ package br.com.uaubox.falemais.service;
 import br.com.uaubox.falemais.domain.model.Customer;
 import br.com.uaubox.falemais.domain.repository.CustomerRepository;
 import br.com.uaubox.falemais.dto.request.CustomerRequest;
-import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
-import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
-import br.com.uaubox.falemais.factory.FactoryManager;
 import com.github.javafaker.Faker;
-import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.net.URI;
 
 @SpringBootTest
 @ActiveProfiles("test")
