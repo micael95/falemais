@@ -24,6 +24,7 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("br.com.uaubox.falemais"))
                 .paths(PathSelectors.ant("/**"))
                 .build()
+                .useDefaultResponseMessages(false)
 //              .ignoredParameterTypes(Customer.class)
                 .apiInfo(apiInfo());
     }

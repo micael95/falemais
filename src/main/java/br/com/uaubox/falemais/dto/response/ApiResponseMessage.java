@@ -1,10 +1,10 @@
 package br.com.uaubox.falemais.dto.response;
 
-public class ApiResponse {
+public class ApiResponseMessage {
     private String code;
     private String message;
 
-    public ApiResponse(String code, String message) {
+    public ApiResponseMessage(String code, String message) {
         this.code = code;
         this.message = message;
     }
