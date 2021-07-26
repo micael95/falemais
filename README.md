@@ -49,4 +49,4 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 ## Casos de Uso
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
 * [Login (Login do cliente)](./requirements/auth.md)
-* [Simulation (Simulação)](./requirements/simulation.md)
+* [Add Simulation (Registrar uma Simulação)](./requirements/add_simulation.md)
