@@ -30,7 +30,7 @@ public class Simulation {
     private Integer destination;
     @Column(nullable = false)
     private Integer timeInMinutes;
-    @Digits(integer = 17, fraction = 2)
+    @Column(nullable = false)
     private BigDecimal price;
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -77,12 +77,12 @@ public class Simulation {
         this.destination = destination;
     }
 
-    public Integer getTimInMinutes() {
+    public Integer getTimeInMinutes() {
         return timeInMinutes;
     }
 
-    public void setTimInMinutes(Integer timInMinutes) {
-        this.timeInMinutes = timInMinutes;
+    public void setTimeInMinutes(Integer timeInMinutes) {
+        this.timeInMinutes = timeInMinutes;
     }
 
     public BigDecimal getPrice() {

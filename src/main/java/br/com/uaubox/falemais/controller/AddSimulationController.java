@@ -1,9 +1,11 @@
 package br.com.uaubox.falemais.controller;
 
+import br.com.uaubox.falemais.domain.model.Customer;
 import br.com.uaubox.falemais.domain.usecases.AddSimulation;
 import br.com.uaubox.falemais.dto.request.SimulationRequest;
 import br.com.uaubox.falemais.dto.response.*;
 import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
+import br.com.uaubox.falemais.exception.InvalidParamException;
 import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -12,13 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/simulation")
-@Api(tags = "Simulation", description = "Api utilizada para dados referente à simulação")
+@Api(tags = "Simulação", description = "Api utilizada para dados referente à simulação")
 public class AddSimulationController {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(AddSimulationController.class);
@@ -37,16 +42,20 @@ public class AddSimulationController {
     })
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> handle(@ApiParam(name = "Simulação", value = "Dados da simulação", required = true)
-                                    @RequestBody @Valid SimulationRequest simulationRequest) {
+                                    @RequestBody @Valid SimulationRequest simulationRequest, HttpServletRequest request) {
         try {
-            SimulationResponse simulationResponse = this.addSimulation.add(simulationRequest);
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Customer customer = new Customer();
+            if (principal instanceof UserDetails) {
+                customer = ((Customer)principal);
+            }
+
+            SimulationResponse simulationResponse = this.addSimulation.add(simulationRequest, customer);
             return new ResponseEntity<>(simulationResponse, HttpStatus.CREATED);
         } catch (Exception ex) {
-            if (ex instanceof InvalidPasswordConfirmationException)
-                return ErrorResponse.handle(((InvalidPasswordConfirmationException) ex).getCode(), ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-
-            if (ex instanceof EmailAlreadyExistsException)
-                return ErrorResponse.handle(((EmailAlreadyExistsException) ex).getCode(), ex.getMessage(), HttpStatus.CONFLICT);
+            ex.printStackTrace();
+            if (ex instanceof InvalidParamException)
+                return ErrorResponse.handle(((InvalidParamException) ex).getCode(), ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 
             return ErrorResponse.handle(ex, LOGGER);
         }
