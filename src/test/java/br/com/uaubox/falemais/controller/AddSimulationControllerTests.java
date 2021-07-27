@@ -87,4 +87,15 @@ public class AddSimulationControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+    @Test
+    public void shouldReturn401IfWrongTokenIsProvided() throws Exception {
+        URI uri = new URI(SIGNUP_URI);
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .header("Authorization", "Bearer " + "Wrong")
+                .content("{}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
 }
