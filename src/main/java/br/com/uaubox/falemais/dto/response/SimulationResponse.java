@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 
 public class SimulationResponse {
 
-    private Integer simulationId;
+    private String simulationId;
     private Integer origin;
     private Integer destination;
     private Integer timeInMinutes;
     private BigDecimal price;
 
-    public Integer getSimulationId() {
+    public String getSimulationId() {
         return simulationId;
     }
 
-    public void setSimulationId(Integer simulationId) {
+    public void setSimulationId(String simulationId) {
         this.simulationId = simulationId;
     }
 

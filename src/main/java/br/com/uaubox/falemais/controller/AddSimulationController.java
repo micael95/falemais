@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/simulation")
-@Api(tags = "Login", description = "Api utilizada para dados referente à simulação")
+@Api(tags = "Simulation", description = "Api utilizada para dados referente à simulação")
 public class AddSimulationController {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(AddSimulationController.class);
