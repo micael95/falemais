@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.uaubox</groupId>
 	<artifactId>falemais</artifactId>
-	<version>1.0.0</version>
+	<version>1.2.0</version>
 	<name>falemais</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

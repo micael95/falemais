@@ -2,6 +2,7 @@ package br.com.uaubox.falemais.config.security;
 
 import br.com.uaubox.falemais.domain.model.Customer;
 import br.com.uaubox.falemais.domain.repository.CustomerRepository;
+import br.com.uaubox.falemais.domain.usecases.TokenManager;
 import br.com.uaubox.falemais.service.TokenManagerService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 public class AuthenticationByTokenFilter extends OncePerRequestFilter {
 
-    private final TokenManagerService tokenManagerService;
+    private final TokenManager tokenManagerService;
     private final CustomerRepository customerRepository;
 
     public AuthenticationByTokenFilter(TokenManagerService tokenManagerService, CustomerRepository customerRepository) {
@@ -26,8 +27,8 @@ public class AuthenticationByTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String token = recoverToken(httpServletRequest);
-        boolean valido = tokenManagerService.isValidToken(token);
-        if (valido) {
+        boolean valid = tokenManagerService.isValidToken(token);
+        if (valid) {
             authCustomer(token);
         }
 

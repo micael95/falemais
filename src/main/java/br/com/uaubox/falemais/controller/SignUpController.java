@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +28,14 @@ public class SignUpController {
     @Autowired
     private AddCustomer addCustomer;
 
-    @PostMapping(produces = "application/json")
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Endpoint utilizado para registrar um cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Cliente cadastrado com sucesso",response = CustomerResponse.class),
             @ApiResponse(code = 400, message = "Dados informados inválidos", response = ValidationResponse.class, responseContainer = "List"),
             @ApiResponse(code = 422, message = "Confirmação de senha inválida", response = ApiResponseMessage.class),
             @ApiResponse(code = 409, message = "Email já cadastrado em nossa base de dados", response = ApiResponseMessage.class),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção", response = ApiResponseMessage.class),
+            @ApiResponse(code = 500, message = "Erro interno no servidor", response = ApiResponseMessage.class),
     })
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> handle(
