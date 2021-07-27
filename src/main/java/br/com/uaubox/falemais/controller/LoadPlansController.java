@@ -32,6 +32,9 @@ public class LoadPlansController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Endpoint utilizado para retornar os planos cadastrados", authorizations = { @Authorization(value="Authorization Bearer") })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization Bearer",
+                    required = true, dataType = "string", paramType = "header") })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Planos encontrados com sucesso", response = PlanResponse.class),
             @ApiResponse(code = 401, message = "Token de acesso inválido", response = ApiResponseMessage.class),

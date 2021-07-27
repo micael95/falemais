@@ -55,4 +55,4 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 
 * Java 8
 * Maven  
-* Banco de dados MySQL ou PostgreSQL ou H2(Banco em memória
+* Banco de dados MySQL ou H2(Banco em memória)

@@ -33,6 +33,9 @@ public class AddSimulationController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Endpoint utilizado para calcular e registrar uma simulação", authorizations = {@Authorization(value = "Authorization Bearer")})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization Bearer",
+                    required = true, dataType = "string", paramType = "header") })
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Simulação registrada com sucesso", response = SimulationResponse.class),
             @ApiResponse(code = 400, message = "Dados informados inválidos", response = ValidationResponse.class, responseContainer = "List"),
