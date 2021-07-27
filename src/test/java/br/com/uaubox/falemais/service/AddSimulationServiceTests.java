@@ -9,11 +9,7 @@ import br.com.uaubox.falemais.domain.repository.SimulationRepository;
 import br.com.uaubox.falemais.domain.repository.TelephoneChargesRepository;
 import br.com.uaubox.falemais.dto.request.SimulationRequest;
 import br.com.uaubox.falemais.dto.response.SimulationResponse;
-import br.com.uaubox.falemais.exception.InvalidParamException;
 import com.github.javafaker.Faker;
-import org.checkerframework.checker.units.qual.A;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @ActiveProfiles("test")

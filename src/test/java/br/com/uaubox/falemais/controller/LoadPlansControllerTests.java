@@ -2,7 +2,6 @@ package br.com.uaubox.falemais.controller;
 
 import br.com.uaubox.falemais.domain.model.Customer;
 import br.com.uaubox.falemais.domain.repository.CustomerRepository;
-import br.com.uaubox.falemais.domain.repository.TelephoneChargesRepository;
 import br.com.uaubox.falemais.domain.usecases.TokenManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;

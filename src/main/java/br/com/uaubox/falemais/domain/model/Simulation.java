@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

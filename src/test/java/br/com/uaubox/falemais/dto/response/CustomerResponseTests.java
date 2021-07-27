@@ -2,7 +2,6 @@ package br.com.uaubox.falemais.dto.response;
 
 import br.com.uaubox.falemais.domain.model.Customer;
 import com.github.javafaker.Faker;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

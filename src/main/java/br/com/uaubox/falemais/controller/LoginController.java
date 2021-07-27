@@ -1,10 +1,11 @@
 package br.com.uaubox.falemais.controller;
 
 import br.com.uaubox.falemais.domain.usecases.AuthCustomer;
-import br.com.uaubox.falemais.domain.usecases.TokenManager;
 import br.com.uaubox.falemais.dto.request.TokenRequest;
-import br.com.uaubox.falemais.dto.response.*;
-import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
+import br.com.uaubox.falemais.dto.response.ApiResponseMessage;
+import br.com.uaubox.falemais.dto.response.ErrorResponse;
+import br.com.uaubox.falemais.dto.response.TokenResponse;
+import br.com.uaubox.falemais.dto.response.ValidationResponse;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
