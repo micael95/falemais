@@ -3,10 +3,7 @@ package br.com.uaubox.falemais.controller;
 import br.com.uaubox.falemais.domain.usecases.LoadPlan;
 import br.com.uaubox.falemais.dto.response.*;
 import br.com.uaubox.falemais.exception.InvalidParamException;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,7 +27,7 @@ public class LoadPlansController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Endpoint utilizado para retornar os planos cadastrados")
+    @ApiOperation(value = "Endpoint utilizado para retornar os planos cadastrados", authorizations = { @Authorization(value="Authorization Bearer") })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Planos encontrados com sucesso", response = CustomerResponse.class),
             @ApiResponse(code = 401, message = "Token de acesso inválido", response = ApiResponseMessage.class),
