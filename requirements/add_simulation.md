@@ -14,7 +14,7 @@
 
 > ## Exceções
 
-1.✅ Retorna erro **400** se os dados não forem informados
-2.✅  Retorna erro **406** se o plano não for encontrado no banco dados
-3.✅ Retorna erro **401** se não for informado um token válido
-5.✅ Retorna erro **500** se der erro interno no servidor
+1. ✅ Retorna erro **400** se os dados não forem informados
+2. ✅  Retorna erro **406** se o plano não for encontrado no banco dados
+3. ✅ Retorna erro **401** se não for informado um token válido
+5. ✅ Retorna erro **500** se der erro interno no servidor
