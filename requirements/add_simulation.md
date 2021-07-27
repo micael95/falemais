@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. Recebe uma requisição do tipo **POST** na rota **/api/v1/simulation**
+1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/simulation**
 2. Valida dados obrigatórios:
    * origin
    * destination
