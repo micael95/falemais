@@ -30,11 +30,11 @@ public class AddCustomerService extends FactoryManager implements AddCustomer {
         Customer customer = getObjectFromRequest(customerRequest, Customer.class);
 
         if (!customer.getPassword().equals(customerRequest.getPasswordConfirmation()))
-            throw new InvalidPasswordConfirmationException("invalid-password-confirmation", "Invalid password confirmation");
+            throw new InvalidPasswordConfirmationException();
 
         Optional<Customer> hasCustomerInDb = customerRepository.findByEmail(customerRequest.getEmail());
         if (hasCustomerInDb.isPresent()) {
-            throw new EmailAlreadyExistsException("email-already-registered", "Email already registered");
+            throw new EmailAlreadyExistsException();
         }
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));

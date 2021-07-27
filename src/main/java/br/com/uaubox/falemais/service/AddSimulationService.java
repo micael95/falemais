@@ -42,7 +42,6 @@ public class AddSimulationService extends FactoryManager implements AddSimulatio
     @Transactional
     @Override
     public SimulationResponse add(SimulationRequest simulationRequest, Customer customer) throws InvalidParamException, Exception {
-        System.out.println("chegou aqui");
         Simulation simulation = getObjectFromRequest(simulationRequest, Simulation.class);
         Optional<Plan> selectedPlan = this.planRepository.findByPlanIdAndActive(simulationRequest.getPlanId(), true);
         if (!selectedPlan.isPresent())
