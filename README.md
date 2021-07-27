@@ -49,3 +49,10 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 ## Casos de Uso
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
 * [Login (Login do cliente)](./requirements/auth.md)
+* [Add Simulation (Registrar uma Simulação)](./requirements/add_simulation.md)
+
+## Requisitos
+
+* Java 8
+* Maven  
+* Banco de dados MySQL ou PostgreSQL ou H2(Banco em memória

@@ -3,6 +3,7 @@ package br.com.uaubox.falemais.dto.response;
 import br.com.uaubox.falemais.domain.model.Customer;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -10,8 +11,8 @@ import org.modelmapper.ModelMapper;
 
 public class CustomerResponseTests {
 
-    private Faker faker = new Faker();
-    private ModelMapper modelMapper = new ModelMapper();
+    private final Faker faker = new Faker();
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @BeforeEach
     public void beforeEach() {
@@ -26,7 +27,7 @@ public class CustomerResponseTests {
         customer.setPassword(faker.internet().password());
 
         CustomerResponse customerResponse = modelMapper.map(customer, CustomerResponse.class);
-        Assert.assertEquals(customer.getName(), customerResponse.getName());
-        Assert.assertEquals(customer.getEmail(), customerResponse.getEmail());
+        Assertions.assertEquals(customer.getName(), customerResponse.getName());
+        Assertions.assertEquals(customer.getEmail(), customerResponse.getEmail());
     }
 }
