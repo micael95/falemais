@@ -1,11 +1,8 @@
 package br.com.uaubox.falemais.controller;
 
-import br.com.uaubox.falemais.domain.usecases.AddCustomer;
-import br.com.uaubox.falemais.dto.request.CustomerRequest;
-import br.com.uaubox.falemais.dto.response.ApiResponseMessage;
-import br.com.uaubox.falemais.dto.response.CustomerResponse;
-import br.com.uaubox.falemais.dto.response.ErrorResponse;
-import br.com.uaubox.falemais.dto.response.ValidationResponse;
+import br.com.uaubox.falemais.domain.usecases.AddSimulation;
+import br.com.uaubox.falemais.dto.request.SimulationRequest;
+import br.com.uaubox.falemais.dto.response.*;
 import br.com.uaubox.falemais.exception.EmailAlreadyExistsException;
 import br.com.uaubox.falemais.exception.InvalidPasswordConfirmationException;
 import io.swagger.annotations.*;
@@ -20,30 +17,30 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/signup")
-@Api(tags = "Cadastro", description = "Api utilizada para registro de clientes")
-public class SignUpController {
+@RequestMapping("/api/v1/simulation")
+@Api(tags = "Login", description = "Api utilizada para dados referente à simulação")
+public class AddSimulationController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(AddSimulationController.class);
+
     @Autowired
-    private AddCustomer addCustomer;
+    private AddSimulation addSimulation;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Endpoint utilizado para registrar um cliente")
+    @ApiOperation(value = "Endpoint utilizado para calcular e registrar uma simulação")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Cliente cadastrado com sucesso",response = CustomerResponse.class),
+            @ApiResponse(code = 201, message = "Simulação registrada com sucesso", response = CustomerResponse.class),
             @ApiResponse(code = 400, message = "Dados informados inválidos", response = ValidationResponse.class, responseContainer = "List"),
-            @ApiResponse(code = 422, message = "Confirmação de senha inválida", response = ApiResponseMessage.class),
-            @ApiResponse(code = 409, message = "Email já cadastrado em nossa base de dados", response = ApiResponseMessage.class),
+            @ApiResponse(code = 401, message = "Token de acesso inválido", response = ApiResponseMessage.class),
+            @ApiResponse(code = 406, message = "Plano de tarifa inválido", response = ApiResponseMessage.class),
             @ApiResponse(code = 500, message = "Erro interno no servidor", response = ApiResponseMessage.class),
     })
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> handle(
-            @ApiParam(name = "Cliente", value = "Dados do cliente", required = true)
-            @RequestBody @Valid CustomerRequest customerRequest) {
+    public ResponseEntity<?> handle(@ApiParam(name = "Simulação", value = "Dados da simulação", required = true)
+                                    @RequestBody @Valid SimulationRequest simulationRequest) {
         try {
-            CustomerResponse customerResponse = this.addCustomer.add(customerRequest);
-            return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
+            SimulationResponse simulationResponse = this.addSimulation.add(simulationRequest);
+            return new ResponseEntity<>(simulationResponse, HttpStatus.CREATED);
         } catch (Exception ex) {
             if (ex instanceof InvalidPasswordConfirmationException)
                 return ErrorResponse.handle(((InvalidPasswordConfirmationException) ex).getCode(), ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);

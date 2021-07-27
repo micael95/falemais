@@ -18,7 +18,7 @@ public class Customer implements UserDetails {
 
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "customer_id", unique = true)
+    @Column(unique = true)
     @Id
     private String customerId;
     @Column(nullable = false)
