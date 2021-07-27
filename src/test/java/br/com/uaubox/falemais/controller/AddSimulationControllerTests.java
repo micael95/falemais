@@ -1,8 +1,11 @@
 package br.com.uaubox.falemais.controller;
 
 import br.com.uaubox.falemais.domain.model.Customer;
+import br.com.uaubox.falemais.domain.model.TelephoneCharges;
 import br.com.uaubox.falemais.domain.repository.CustomerRepository;
+import br.com.uaubox.falemais.domain.repository.TelephoneChargesRepository;
 import br.com.uaubox.falemais.domain.usecases.TokenManager;
+import br.com.uaubox.falemais.dto.request.SimulationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +35,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,6 +62,8 @@ public class AddSimulationControllerTests {
     private AuthenticationManager authManager;
     @Autowired
     private TokenManager tokenManager;
+    @Autowired
+    private TelephoneChargesRepository telephoneChargesRepository;
 
     @BeforeEach
     public void beforeEach() {
@@ -96,6 +102,29 @@ public class AddSimulationControllerTests {
                 .content("{}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+    @Test
+    public void shouldReturn406IfWrongPlanIsProvided() throws Exception {
+        URI uri = new URI(SIGNUP_URI);
+        TelephoneCharges telephoneCharges = new TelephoneCharges();
+        telephoneCharges.setOrigin(Integer.parseInt(faker.phoneNumber().subscriberNumber(2)));
+        telephoneCharges.setDestination(Integer.parseInt(faker.phoneNumber().subscriberNumber(2)));
+        telephoneCharges.setPerMinuteRate(new BigDecimal(faker.number().digits(2)));
+        telephoneChargesRepository.save(telephoneCharges);
+
+        SimulationRequest simulationRequest = new SimulationRequest();
+        simulationRequest.setOrigin(telephoneCharges.getOrigin());
+        simulationRequest.setDestination(telephoneCharges.getDestination());
+        simulationRequest.setTimeInMinutes(Integer.valueOf(faker.number().digits(2)));
+        simulationRequest.setPlanId("invalid_plan_id");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .header("Authorization", "Bearer " + TOKEN)
+                .content(objectMapper.writeValueAsString(simulationRequest))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotAcceptable());
     }
 
 }
