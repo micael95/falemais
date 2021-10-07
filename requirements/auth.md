@@ -1,13 +1,13 @@
-# Cadastro
+# Registration
 
-> ## Caso de sucesso
+> ## Success case
 
-1. ✅  Recebe uma requisição do tipo **POST** na rota **/oauth/token**
-2. ✅  Valida dados obrigatórios **email** e **password**
-3. ✅  Retorna status **200** e um token com data de expira
+1. ✅ Receives a request of type **POST** in the route **/oauth/token**
+2. ✅ Validates mandatory **email** and **password** data
+3. ✅ Returns **200** status and an expiry date token
 
-> ## Exceções
+> ## Exceptions
 
-1. ✅  Retorna erro **400** se email e password não forem informados
-2. ✅  Retorna erro **401** se as credencias forem invalidas
-3. ✅  Retorna erro **500** se der erro interno no servidor
+1. ✅ Returns error **400** if email and password are not informed
+2. ✅ Returns **401** error if credentials are invalid
+3. ✅ Returns **500** error if there is an internal server error

@@ -1,19 +1,19 @@
-# Cadastro
+# Registration
 
-> ## Caso de sucesso
+> ## Success case
 
-1. ✅ Recebe uma requisição do tipo **POST** na rota **/api/v1/signup**
-2. ✅ Valida dados obrigatórios **name**, **email**, **password** e **passwordConfirmation**
-3. ✅ Valida que **password** e **passwordConfirmation** são iguais
-4. ✅ Valida que o campo **email** é um e-mail válido
-5. ✅ **Valida** se já existe um usuário com o email fornecido
-6. ✅ Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
-7. ✅ **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptorafada
+1. ✅ Receives a request of type **POST** in the route **/api/v1/signup**
+2. ✅ Validates mandatory data **name**, **email**, **password** and **passwordConfirmation**
+3. ✅ Validates that **password** and **passwordConfirmation** are the same
+4. ✅ Validate that the **email** field is a valid email address
+5. ✅ **Validates** if there is already a user with the email provided
+6. ✅ Generates a **encrypted** password (this password cannot be decrypted)
+7. ✅ **Creates** an account for the user with the data entered, **replacing** the password with the encrypted password
 
-> ## Exceções
+> ## Exceptions
 
-1. ✅ Retorna erro **400** se name, email, password ou passwordConfirmation não forem fornecidos pelo client
-2. ✅ Retorna erro **422** se password e passwordConfirmation não forem iguais
-3. ✅ Retorna erro **422** se o campo email for um e-mail inválido
-4. ✅ Retorna erro **409** se o email fornecido já estiver em uso
-5. ✅ Retorna erro **500** se der erro interno no servidor
+1. ✅ Returns **400** error if name, email, password or passwordConfirmation are not provided by the client
+2. ✅ Returns error **422** if password and passwordConfirmation are not the same
+3. ✅ Returns **422** error if the email field is an invalid email
+4. ✅ Returns error **409** if the email provided is already in use
+5. ✅ Returns **500** error if there is an internal server error
