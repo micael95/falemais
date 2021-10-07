@@ -2,36 +2,26 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # **FaleMais Spring API**
 
-## Sobre
-[Desafio UAUBox Brasil](./requirements/challenge/Dev+Backend+-+Desafio.pdf)\
-Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes requisitos:
-* Ser desenvolvido em Java com Spring Boot. 
-* Orientação a objetos. 
-* Clareza, boas práticas e organização de código.
-* Utilizar GIT para versionamento de código.
-* Adicione um arquivo README.md com os requisitos básicos e procedimentos para executar a
-  aplicação.
-#### Opcional  
-* Utilização de testes unitários
-* Uso avançado da linguagem e/ou framework.
+## About
+[Falemais Challenge](./requirements/challenge/challenge.pdf)
 
 ## Demo
-* [Aplicação demo disponibilizada no heroku](https://falemais-uaubox.herokuapp.com/swagger-ui.html)
+* [Demo Application in Heroku](https://falemais-challenge.herokuapp.com/swagger-ui.html)
 
-## Conceitos utilizados
+## Concepts
 
 * Clean Code
 * Clean Architecture
-* Alguns principios de SOLID
-* POO Avançado
+* Some principles of SOLID
+* Advanced POO
 * TDD
 * GitFlow
 * Conventional Commits
 
-## Ferramentas utilizadas
+## Tools
 
 * Heroku
-* CI/CD com GitHub Actions  
+* CI/CD with GitHub Actions  
 * Docker  
 * Sprint Starter Web  
 * Spring Security
@@ -42,17 +32,17 @@ Aplicação com objetivo de resolver o desafio proposto utilizando os seguintes 
 * Faker
 * Mockito
 
-## DER
+## EER
 
 ![alt text](./requirements/assets/der.png)
 
-## Casos de Uso
+## Use cases
 * [SignUp (Cadastro de Clientes)](./requirements/signup.md)
 * [Login (Login do cliente)](./requirements/auth.md)
 * [Add Simulation (Registrar uma Simulação)](./requirements/add_simulation.md)
 
-## Requisitos
+## Requirements
 
 * Java 8
 * Maven  
-* Banco de dados MySQL ou H2(Banco em memória)
+* MySQL Database/H2
